@@ -4,61 +4,61 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
-
     private Container cp;
-    private JLabel jlid = new JLabel("ID:");
-    private JLabel jlpw = new JLabel("password:");
+    private JLabel jlbid = new JLabel("ID: ");
+    private JLabel jlbpw = new JLabel("PassWord: ");
     private JTextField jtfid = new JTextField();
     private JPasswordField jtfpw = new JPasswordField();
-    private JButton jbexit = new JButton("Exit");
-    private JButton jblogin = new JButton("Login");
-    private  Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    private int fmW=300,fmH=150,screenW,screenH;
+    // private JTextField jtfpw = new JTextField();
+    private JButton jbtexit = new JButton("Exit");
+    private JButton jbtlog = new JButton("Login");
+    private Dimension dis = Toolkit.getDefaultToolkit().getScreenSize();
+    private int frmW = 300, frmH = 150, disW, disH;
 
     public LoginFrame(){
         initComp();
     }
 
     private void initComp(){
-        screenW = dim.width;
-        screenH = dim.height;
+        disW = dis.width;
+        disH = dis.height;
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setBounds(screenW/2-fmW/2,screenH/2-fmH/2,fmW,fmH);
+        this.setBounds(disW/2-frmW/2,disH/2-frmH/2,frmW,frmH);
+
         cp = this.getContentPane();
         cp.setLayout(new GridLayout(3,2,3,3));
+        cp.add(jlbid);
+        jlbid.setHorizontalAlignment(JLabel.RIGHT);
+        cp.add(jtfid);
+        cp.add(jlbpw);
+        jlbpw.setHorizontalAlignment(JLabel.RIGHT);
+        cp.add(jtfpw);
+        cp.add(jbtexit);
+        cp.add(jbtlog);
 
-        jlid.setHorizontalAlignment(JLabel.RIGHT);
-        jlpw.setHorizontalAlignment(JLabel.RIGHT);
-
-
-        jbexit.addActionListener(new ActionListener() {
+        jbtexit.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 System.exit(0);
             }
         });
 
-        jblogin.addActionListener(new ActionListener() {
+        jbtlog.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
                 if(jtfid.getText().equals("h304") && new String(jtfpw.getPassword()).equals("23323456")){
-                    MainFrame mf = new MainFrame(LoginFrame.this);
-                    mf.setVisible(true);
+                    MainFrame mfm = new MainFrame(LoginFrame.this);
+                    mfm.setVisible(true);
                     LoginFrame.this.setVisible(false);
-                }else{
-                    JOptionPane.showMessageDialog(LoginFrame.this,"Wrong ID or Password");
+                }
+                else {
+                    JOptionPane.showMessageDialog(LoginFrame.this,"Error");
                 }
             }
         });
 
-        cp.add(jlid);
-        cp.add(jtfid);
-        cp.add(jlpw);
-        cp.add(jtfpw);
-        cp.add(jbexit);
-        cp.add(jblogin);
-
     }
+
     public void reset(){
         jtfid.setText("");
         jtfpw.setText("");
